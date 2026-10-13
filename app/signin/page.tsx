@@ -210,7 +210,13 @@ export default function SignInPage() {
     });
 
     if (error || !data.user) {
-      setAuthError(error?.message || "Sign in failed.");
+      if (error?.message?.toLowerCase().includes("api key")) {
+        setAuthError(
+          "Invalid Supabase API key. In your .env.local, use the 'anon' public JWT key (starts with 'eyJ...') from Supabase Dashboard > Project Settings > API, not the publishable key."
+        );
+      } else {
+        setAuthError(error?.message || "Sign in failed.");
+      }
       setSubmitting(false);
       return;
     }
@@ -300,7 +306,13 @@ export default function SignInPage() {
     });
 
     if (error || !data.user) {
-      setAuthError(error?.message || "Account creation failed.");
+      if (error?.message?.toLowerCase().includes("api key")) {
+        setAuthError(
+          "Invalid Supabase API key. In your .env.local, use the 'anon' public JWT key (starts with 'eyJ...') from Supabase Dashboard > Project Settings > API, not the publishable key."
+        );
+      } else {
+        setAuthError(error?.message || "Account creation failed.");
+      }
       setSubmitting(false);
       return;
     }
