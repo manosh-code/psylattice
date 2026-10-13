@@ -44,7 +44,10 @@ export async function authenticateMobileRequest(
   const authorization = request.headers.get("authorization") || "";
   const match = /^Bearer\s+([^\s]+)$/i.exec(authorization);
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  const key =
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_KEY;
 
   if (!match || !url || !key) {
     return mobileError("UNAUTHORIZED", 401);

@@ -5,7 +5,10 @@ export default function DebugPage() {
     process.env.NEXT_PUBLIC_SUPABASE_URL || "MISSING";
 
   const key =
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "";
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_KEY ||
+    "";
 
   const keyFingerprint = key
     ? `${key.slice(0, 18)}...${key.slice(-6)} (${key.length} chars)`

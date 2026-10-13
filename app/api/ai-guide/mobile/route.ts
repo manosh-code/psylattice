@@ -50,7 +50,9 @@ function jsonError(error: string, status = 400) {
 async function authenticatedAndroidUser(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const publishableKey =
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_KEY;
 
   if (!supabaseUrl || !publishableKey) {
     throw new Error("PsyLattice authentication is not configured.");
